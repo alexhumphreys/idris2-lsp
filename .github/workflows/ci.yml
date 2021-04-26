@@ -35,7 +35,7 @@ jobs:
           cd idris2
           make bootstrap
           make install
-          make clean -- to make sure you're building everything with the new version
+          make clean # to make sure you're building everything with the new version
           make distclean
           make all
           make install
