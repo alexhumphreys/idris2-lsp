@@ -23,7 +23,6 @@ jobs:
         with:
           repository: idris-lang/idris2
           path: idris2
-            build-bootstrap-chez:
       - name: Install build dependencies
         run: |
           sudo apt-get install -y chezscheme
