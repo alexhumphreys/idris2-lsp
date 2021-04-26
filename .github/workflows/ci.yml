@@ -23,7 +23,7 @@ jobs:
           path: idris2
       - name: install idris2api
         run: |
-          cd idris2 && make install-api && make install-libs
+          cd idris2 && make install-api && make install-libs IDRIS2=idris2
         shell: bash
       - name: build and test
         run: |
