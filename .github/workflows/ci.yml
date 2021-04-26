@@ -23,8 +23,7 @@ jobs:
           path: idris2
       - name: install idris2api
         run: |
-          ls ~/.idris2/idris2-0.3.0/
-          cd idris2 && idris2 --install idris2api.ipkg
+          cd idris2 && make install-api && make install-libs
         shell: bash
       - name: build and test
         run: |
