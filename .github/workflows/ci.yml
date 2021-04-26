@@ -32,9 +32,12 @@ jobs:
           echo "$HOME/.idris2/bin" >> $GITHUB_PATH
       - name: Build from bootstrap
         run: |
-          cd idris2 && make bootstrap && make install
+          cd idris2
+          make bootstrap
+          make install
           make clean -- to make sure you're building everything with the new version
-          make all && make install
+          make all
+          make install
           make install-api
         shell: bash
       - name: build and test
