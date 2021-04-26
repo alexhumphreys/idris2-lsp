@@ -36,6 +36,7 @@ jobs:
           make bootstrap
           make install
           make clean -- to make sure you're building everything with the new version
+          make distclean
           make all
           make install
           make install-api
