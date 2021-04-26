@@ -12,7 +12,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: snazzybucket/idris2:latest
+    env:
+      IDRIS2_CG: chez
+      IDRIS2_TESTS_CG: chez
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -21,9 +23,13 @@ jobs:
         with:
           repository: idris-lang/idris2
           path: idris2
-      - name: install idris2api
+            build-bootstrap-chez:
+      - name: Install build dependencies
         run: |
-          cd idris2 && make install-api && make install-libs IDRIS2=idris2
+          sudo apt-get install -y chezscheme
+          echo "::add-path::$HOME/.idris2/bin"
+      - name: Build from bootstrap
+        run: cd idris2 && make bootstrap && make install && make install-api
         shell: bash
       - name: build and test
         run: |
