@@ -1,10 +1,10 @@
-Content-Length: 267
+Content-Length: 243
 
-{"jsonrpc":"2.0","id":0,"method":"initialize","params":{"processId":17766,"rootPath":"/private/tmp/testidris2lsp","rootUri":"file:///private/tmp/testidris2lsp","capabilities":{},"workspaceFolders":[{"uri":"file:///private/tmp/testidris2lsp","name":"testidris2lsp"}]}}Content-Length: 229
+{"jsonrpc":"2.0","id":0,"method":"initialize","params":{"processId":17766,"rootPath":"/tmp/testidris2lsp","rootUri":"file:///tmp/testidris2lsp","capabilities":{},"workspaceFolders":[{"uri":"file:///tmp/testidris2lsp","name":"testidris2lsp"}]}}Content-Length: 221
 
-{"jsonrpc":"2.0","method":"textDocument/didOpen","params":{"textDocument":{"uri":"file:///private/tmp/testidris2lsp/Idris2LSPTest/LSPMakeCase.idr","languageId":"idris","version":1,"text":"foo : Nat -> Bool\nfoo k = ?foo_rhs\n"}}}Content-Length: 264
+{"jsonrpc":"2.0","method":"textDocument/didOpen","params":{"textDocument":{"uri":"file:///tmp/testidris2lsp/Idris2LSPTest/LSPMakeCase.idr","languageId":"idris","version":1,"text":"foo : Nat -> Bool\nfoo k = ?foo_rhs\n"}}}Content-Length: 256
 
-{"jsonrpc":"2.0","id":1,"method":"textDocument/codeAction","params":{"textDocument":{"uri":"file:///private/tmp/testidris2lsp/Idris2LSPTest/LSPMakeCase.idr"},"range":{"start":{"line":1,"character":14},"end":{"line":1,"character":14}},"context":{"diagnostics":[]}}}Content-Length: 44
+{"jsonrpc":"2.0","id":1,"method":"textDocument/codeAction","params":{"textDocument":{"uri":"file:///tmp/testidris2lsp/Idris2LSPTest/LSPMakeCase.idr"},"range":{"start":{"line":1,"character":14},"end":{"line":1,"character":14}},"context":{"diagnostics":[]}}}Content-Length: 44
 
 {"jsonrpc":"2.0","id":2,"method":"shutdown"}Content-Length: 40
 
