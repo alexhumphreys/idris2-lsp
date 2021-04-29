@@ -1,6 +1,6 @@
-Content-Length: 661
+Content-Length: 267
 
-{"jsonrpc":"2.0","id":0,"method":"initialize","params":{"processId":17766,"rootPath":"/private/tmp/testidris2lsp","rootUri":"file:///private/tmp/testidris2lsp","capabilities":{"textDocument":{"codeAction":{"dynamicRegistration":true,"isPreferredSupport":true,"disabledSupport":true,"dataSupport":true,"resolveSupport":{"properties":["edit"]},"codeActionLiteralSupport":{"codeActionKind":{"valueSet":["","quickfix","refactor","refactor.extract","refactor.inline","refactor.rewrite","source","source.organizeImports"]}},"honorsChangeAnnotations":false}}},"trace":"messages","workspaceFolders":[{"uri":"file:///private/tmp/testidris2lsp","name":"testidris2lsp"}]}}Content-Length: 229
+{"jsonrpc":"2.0","id":0,"method":"initialize","params":{"processId":17766,"rootPath":"/private/tmp/testidris2lsp","rootUri":"file:///private/tmp/testidris2lsp","capabilities":{},"workspaceFolders":[{"uri":"file:///private/tmp/testidris2lsp","name":"testidris2lsp"}]}}Content-Length: 229
 
 {"jsonrpc":"2.0","method":"textDocument/didOpen","params":{"textDocument":{"uri":"file:///private/tmp/testidris2lsp/Idris2LSPTest/LSPMakeCase.idr","languageId":"idris","version":1,"text":"foo : Nat -> Bool\nfoo k = ?foo_rhs\n"}}}Content-Length: 264
 
