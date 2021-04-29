@@ -1,0 +1,28 @@
+Content-Length: 1051
+
+{"jsonrpc":"2.0","id":0,"result":{"capabilities":{"textDocumentSync":{"openClose":true,"change":1,"save":{"includeText":true}},"completionProvider":{"triggerCharacters":[],"allCommitCharacters":[]},"hoverProvider":true,"signatureHelpProvider":{},"declarationProvider":false,"typeDefinitionProvider":false,"implementationProvider":false,"referencesProvider":false,"documentHighlightProvider":false,"documentSymbolProvider":false,"codeActionProvider":{"codeActionKinds":["case-split","generate-def","make-case"],"resolveProvider":false},"codeLensProvider":{},"documentLinkProvider":{},"colorProvider":false,"documentFormattingProvider":false,"documentRangeFormattingProvider":false,"renameProvider":false,"foldingRangeProvider":false,"executeCommandProvider":{"commands":[]},"selectionRangeProvider":false,"linkedEditingRangeProvider":false,"callHierarchyProvider":false,"monikerProvider":false,"workspaceSymbolProvider":false,"workspace":{"workspaceFolders":{"supported":false},"fileOperations":{}}},"serverInfo":{"name":"idris2-lsp","version":"0.1"}}}1/1: Building LSPMakeCase (/private/tmp/testidris2lsp/Idris2LSPTest/LSPMakeCase.idr)
+Content-Length: 172
+
+{"jsonrpc":"2.0","method":"textDocument/publishDiagnostics","params":{"uri":"file:///private/tmp/testidris2lsp/Idris2LSPTest/LSPMakeCase.idr","version":1,"diagnostics":[]}}Content-Length: 36
+
+{"jsonrpc":"2.0","id":1,"result":[]}Content-Length: 99
+
+{"jsonrpc":"2.0","id":2,"error":{"code":-32601,"message":"Method not implemented yet","data":null}}Content-Length: 136
+
+{"jsonrpc":"2.0","id":3,"result":{"contents":{"kind":"plaintext","value":"   k : Nat\n------------------------------\nfoo_rhs : Bool"}}}Content-Length: 99
+
+{"jsonrpc":"2.0","id":4,"error":{"code":-32601,"message":"Method not implemented yet","data":null}}Content-Length: 99
+
+{"jsonrpc":"2.0","id":5,"error":{"code":-32601,"message":"Method not implemented yet","data":null}}Content-Length: 986
+
+{"jsonrpc":"2.0","id":6,"result":[{"title":"Make case for hole ?foo_rhs","kind":"make-case","diagnostics":[],"isPreferred":false,"edit":{"changes":{"file:///private/tmp/testidris2lsp/Idris2LSPTest/LSPMakeCase.idr":[{"range":{"start":{"line":1,"character":0},"end":{"line":1,"character":16}},"newText":"foo k = case _ of\n             case_val => ?foo_rhs"}]}}},{"title":"Expression search on Main.foo_rhs as ~ True ...","kind":"refactor.rewrite.auto","diagnostics":[],"isPreferred":false,"edit":{"changes":{"file:///private/tmp/testidris2lsp/Idris2LSPTest/LSPMakeCase.idr":[{"range":{"start":{"line":1,"character":8},"end":{"line":1,"character":16}},"newText":"True"}]}}},{"title":"Expression search on Main.foo_rhs as ~ False ...","kind":"refactor.rewrite.auto","diagnostics":[],"isPreferred":false,"edit":{"changes":{"file:///private/tmp/testidris2lsp/Idris2LSPTest/LSPMakeCase.idr":[{"range":{"start":{"line":1,"character":8},"end":{"line":1,"character":16}},"newText":"False"}]}}}]}Content-Length: 78
+
+{"jsonrpc":"2.0","id":7,"result":{"contents":{"kind":"plaintext","value":""}}}Content-Length: 85
+
+{"jsonrpc":"2.0","id":8,"result":{"contents":{"kind":"plaintext","value":"k : Nat"}}}Content-Length: 99
+
+{"jsonrpc":"2.0","id":9,"error":{"code":-32601,"message":"Method not implemented yet","data":null}}Content-Length: 342
+
+{"jsonrpc":"2.0","id":10,"result":[{"title":"Case split on k","kind":"case-split","diagnostics":[],"isPreferred":false,"edit":{"changes":{"file:///private/tmp/testidris2lsp/Idris2LSPTest/LSPMakeCase.idr":[{"range":{"start":{"line":1,"character":0},"end":{"line":1,"character":16}},"newText":"foo 0 = ?foo_rhs_1\nfoo (S k) = ?foo_rhs_2"}]}}}]}Content-Length: 137
+
+{"jsonrpc":"2.0","id":11,"result":{"contents":{"kind":"plaintext","value":"   k : Nat\n------------------------------\nfoo_rhs : Bool"}}}
