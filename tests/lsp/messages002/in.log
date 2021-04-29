@@ -1,0 +1,7 @@
+Content-Length: 533
+
+{"jsonrpc":"2.0","id":0,"method":"initialize","params":{"processId":null,"rootUri":"file:///tmp/LSPMakeCase.idr","capabilities":{"codeAction":{"dynamicRegistration":true,"isPreferredSupport":true,"disabledSupport":true,"dataSupport":true,"resolveSupport":{"properties":["edit"]},"codeActionLiteralSupport":{"codeActionKind":{"valueSet":["","quickfix","refactor","refactor.extract","refactor.inline","refactor.rewrite","source","source.organizeImports"]}},"honorsChangeAnnotations":false},"workspaceFolders":[{"uri":"file:///tmp"}]}}}Content-Length: 44
+
+{"jsonrpc":"2.0","id":1,"method":"shutdown"}Content-Length: 40
+
+{"jsonrpc":"2.0","id":1,"method":"exit"}
