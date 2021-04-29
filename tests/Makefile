@@ -4,6 +4,7 @@ INTERACTIVE ?= --interactive
 
 test:
 	touch /tmp/test-lsp.idr
+	cp ./fixtures/LSPMakeCase.idr /tmp
 	./build/exec/runtests lsp $(INTERACTIVE) --only $(only)
 
 testbin:
