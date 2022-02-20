@@ -3,6 +3,7 @@ want to add semantic selections, maybe then navigation and evaluation
 general design:
 
 example.
+
 ```
 (x + foo) + (y + z)
 ```
@@ -31,4 +32,23 @@ whatever `:eval` is doing https://github.com/idris-lang/Idris2/blob/80ff76b357a1
 [DEBUG][2022-02-20 15:18:55] .../vim/lsp/rpc.lua:454    "rpc.receive"   {  id = 5,  jsonrpc = "2.0",  result = {    contents = {      kind = "plaintext",      value = "Prelude.show : Show ty => ty -> String"    }  }}
 ```
 
-next step is to hook into some vim keyboard shortcut so i can execute something
+`<leader>j` to jump to metavars makes the following log lines:
+```
+[DEBUG][2022-02-20 15:35:25] .../lua/vim/lsp.lua:1023   "LSP[idris2_lsp]"       "client.request"        1       "workspace/executeCommand"      {  command = "metavars"}        <function 1>    1
+[DEBUG][2022-02-20 15:35:25] .../vim/lsp/rpc.lua:347    "rpc.send"      {  id = 5,  jsonrpc = "2.0",  method = "workspace/executeCommand",  params = {    command = "metavars"  }}
+[ERROR][2022-02-20 15:35:25] .../vim/lsp/rpc.lua:420    "rpc"   "idris2-lsp"    "stderr"        'LOG DEBUG:Communication.Channel: Received message: {"method":"workspace\\/executeCommand","jsonrpc":"2.0","id":5,"params":{"command":"metavars"}}\nLOG INFO:Communication.Channel: Received request for method "workspace/executeCommand"\nLOG INFO:Communication.Channel: Received metavars command request\nLOG INFO:Request.Command.Metavars: Fetching metavars\nLOG INFO:Request.Command.Metavars: Metavars fetched, found 1\nLOG INFO:Communication.Channel: Sent response message for method "workspace/executeCommand"\nLOG DEBUG:Communication.Channel: Response sent: {"jsonrpc":"2.0","id":5,"result":[{"name":"Language.LSP.Message.Hover.bar","location":{"uri":"file:///Users/alexhumphreys/misc/idris2-lsp/src/Language/LSP/Message/Hover.idr","range":{"start":{"line":55,"character":6},"end":{"line":55,"character":10}}},"type":"String","premises":[]}]}\n'
+[DEBUG][2022-02-20 15:35:25] .../vim/lsp/rpc.lua:454    "rpc.receive"   {  id = 5,  jsonrpc = "2.0",  result = { {      location = {        range = {          end = {            character = 10,            line = 55          },          start = {            character = 6,            line = 55          }        },        uri = "file:///Users/alexhumphreys/misc/idris2-lsp/src/Language/LSP/Message/Hover.idr"      },      name = "Language.LSP.Message.Hover.bar",      premises = {},      type = "String"    } }}
+```
+
+next step is to hook into some vim keyboard shortcut so i can execute something. metavars command seems easiest to copy
+
+in vimscript use `:call cursor(l,c)` to place to cursor at line l and column c
+`25|` in vim normal mode will jump to character 25 of the current line
+`10gg` will jump to line 10 in normal mode.
+
+tail lsp/neovim with `tail -f /Users/alexhumphreys/.cache/nvim/lsp.log`
+
+can call my random executeCommand stuff with:
+```
+:lua vim.lsp.buf_request(0, 'workspace/executeCommand', { command = 'alex' })
+```

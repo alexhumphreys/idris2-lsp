@@ -39,6 +39,7 @@ import Language.LSP.DocumentHighlight
 import Language.LSP.DocumentSymbol
 import Language.LSP.Message
 import Language.LSP.Metavars
+import Language.LSP.Alex
 import Language.LSP.SignatureHelp
 import Libraries.Data.List.Extra
 import Libraries.Data.PosMap
@@ -472,6 +473,9 @@ handleRequest WorkspaceExecuteCommand
 handleRequest WorkspaceExecuteCommand (MkExecuteCommandParams _ "metavars" _) = whenActiveRequest $ \conf => do
   logI Channel "Received metavars command request"
   Right . toJSON <$> metavarsCmd
+handleRequest WorkspaceExecuteCommand (MkExecuteCommandParams _ "alex" _) = whenActiveRequest $ \conf => do
+  logI Channel "Received alex command request"
+  Right . toJSON <$> alexCmd
 handleRequest WorkspaceExecuteCommand (MkExecuteCommandParams _ "exprSearchWithHints" (Just [json])) = whenActiveRequest $ \conf => do
   logI Channel "Received exprSearchWithHints command request"
   let Just params = fromJSON json
