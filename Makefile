@@ -31,6 +31,9 @@ clean:
 repl: src/Server/Generated.idr
 	rlwrap $(IDRIS2) --repl lsp.ipkg
 
+repl2:
+	rlwrap -n idris2 --find-ipkg src/Server/ProcessMessage.idr
+
 testbin:
 	@${MAKE} -C tests testbin
 
