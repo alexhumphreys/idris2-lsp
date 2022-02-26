@@ -52,3 +52,17 @@ can call my random executeCommand stuff with:
 ```
 :lua vim.lsp.buf_request(0, 'workspace/executeCommand', { command = 'alex' })
 ```
+
+`processMap` here is an interesting function: https://github.com/idris-lang/Idris2/blob/1011cc6162bad580b0c51237c86fbf4fe2035fbe/src/Idris/ProcessIdr.idr#L278
+
+it also calls `Parser.Source.runParser` which could be useful: https://github.com/idris-lang/Idris2/blob/1011cc6162bad580b0c51237c86fbf4fe2035fbe/src/Idris/ProcessIdr.idr#L333
+
+conversation on the discord about this: https://discord.com/channels/827106007712661524/861619141470584852/947042105245700167
+
+that `runParser` call in `processMap` returns a Module: https://github.com/idris-lang/Idris2/blob/c8a5ad6d97519077cd011113ab445f821d42f6e0/src/Idris/Syntax.idr#L649
+
+`Module` has a list of `PDecl`: https://github.com/idris-lang/Idris2/blob/c8a5ad6d97519077cd011113ab445f821d42f6e0/src/Idris/Syntax.idr#L421
+
+`PDecl` contains `PTerm`: https://github.com/idris-lang/Idris2/blob/c8a5ad6d97519077cd011113ab445f821d42f6e0/src/Idris/Syntax.idr#L65
+
+so if i traverse the list of `PDecl`, then traverse each `PDecl` to get the `PTerm`s, I should be able to get a tree of `FC` ranges I need!
