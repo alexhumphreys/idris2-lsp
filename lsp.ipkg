@@ -11,6 +11,7 @@ main = Server.Main
 executable = idris2-lsp
 
 modules = Data.URI
+        , Data.Interfaces
         , Language.JSON.Interfaces
         , Language.LSP.Message
         , Language.LSP.Message.CallHierarchy

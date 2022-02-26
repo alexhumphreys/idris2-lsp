@@ -32,7 +32,7 @@ repl: src/Server/Generated.idr
 	rlwrap $(IDRIS2) --repl lsp.ipkg
 
 repl2:
-	rlwrap -n idris2 --find-ipkg src/Server/ProcessMessage.idr
+	rlwrap -n idris2 --find-ipkg src/Data/Interfaces.idr
 
 testbin:
 	@${MAKE} -C tests testbin
