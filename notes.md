@@ -66,3 +66,18 @@ that `runParser` call in `processMap` returns a Module: https://github.com/idris
 `PDecl` contains `PTerm`: https://github.com/idris-lang/Idris2/blob/c8a5ad6d97519077cd011113ab445f821d42f6e0/src/Idris/Syntax.idr#L65
 
 so if i traverse the list of `PDecl`, then traverse each `PDecl` to get the `PTerm`s, I should be able to get a tree of `FC` ranges I need!
+
+lets take an example:
+
+```
+(sqrt (- (* (+ x w) (/ y z))
+         (- t u)))
+```
+sqrt (0,0)(1,18)
+- (0,7)(1,17)
+* (0,10)(0,28)
++ (0,13)(0,19)
+/ (0,23)(0,27)
+- (1,10)(1,16)
+
+Next to add the terms, then put that into a finger tree and see what happens
