@@ -1,5 +1,6 @@
 module Data.Interfaces
 
+import Core.FC
 import Libraries.Data.PosMap
 import Idris.Syntax
 
@@ -86,3 +87,36 @@ mutual
 
   Functor PClause' where
     map a b = ?foo3
+
+{-
+((0,0), (1,18)) "sqrt"
+((0,7), (1,17)) "-"
+((0,10), (0,28)) "*"
+((0,13), (0,19)) "+"
+((0,23), (0,27)) "/"
+((1,10), (1,16)) "-"
+-}
+
+data Expr = MkExpr (FilePos, FilePos) string
+
+Measure Expr where
+  measure (MkExpr fp _) = fp
+
+exprLs : List (Expr)
+exprLs =
+  [ MkExpr ((0,0), (1,18)) "sqrt"
+  , MkExpr ((0,7), (1,17)) "-"
+  , MkExpr ((0,10), (0,28)) "*"
+  , MkExpr ((0,13), (0,19)) "+"
+  , MkExpr ((0,23), (0,27)) "/"
+  , MkExpr ((1,10), (1,16)) "-"
+  ]
+
+ex : PosMap Expr
+ex = empty
+
+addStuff : PosMap Expr
+addStuff = foldl (flip insert) ex exprLs
+
+exp11 : List Expr
+exp11 = searchPos (0,24) addStuff
