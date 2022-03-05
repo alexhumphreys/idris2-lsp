@@ -21,15 +21,17 @@ Measure PTerm where
               (MkVirtualFC x y z) => (y, z)
               EmptyFC => ?lkjl_2
 
-go : Maybe NonEmptyFC -> a -> PosMap (NonEmptyFC, a) -> PosMap (NonEmptyFC, a)
-go (Just fc) x pm = insert (fc, x) pm
-go Nothing _ pm = pm
+go : FC -> a -> PosMap (NonEmptyFC, a) -> PosMap (NonEmptyFC, a)
+go fc x pm = let nonEmpty = isNonEmptyFC fc in
+  case nonEmpty of
+       Nothing => pm
+       (Just z) => insert (z, x) pm
 
 getPDeclFCs : PosMap (NonEmptyFC, PDecl) -> PDecl -> PosMap (NonEmptyFC, PDecl)
 
 getPTermFCs : PosMap (NonEmptyFC, PTerm) -> PTerm -> PosMap (NonEmptyFC, PTerm)
-getPTermFCs pm p@(PRef fc x) = let nonEmpty = isNonEmptyFC fc in
-  go nonEmpty p pm
+getPTermFCs pm p@(PRef fc x) =
+  go fc p pm
 getPTermFCs pm p@(PPi fc x y z argTy retTy) = ?lkjlkk12
 getPTermFCs pm p@(PLam fc x y z argTy scope) = ?lkjlkk13
 getPTermFCs pm p@(PLet fc x pat nTy nVal scope alts) = ?getPTermFCs_rhs_3
