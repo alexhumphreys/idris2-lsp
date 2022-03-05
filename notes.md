@@ -81,3 +81,7 @@ sqrt (0,0)(1,18)
 - (1,10)(1,16)
 
 Next to add the terms, then put that into a finger tree and see what happens
+
+hmm might want to use NonEmptyFC since i'm only interested in stuff that ends up in the text files.
+
+gonna try make a PosMap (NonEmptyFC, PTerm), see if that's all the info i need. Worried it might be too big to put in the metadata, let's see.

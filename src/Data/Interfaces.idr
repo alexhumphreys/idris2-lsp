@@ -13,69 +13,79 @@ data ASTShape
   | Four FC ASTShape ASTShape ASTShape
   | FiveLS FC ASTShape ASTShape ASTShape ASTShape (List ASTShape)
 
-getPDeclFCs : PDecl -> ASTShape
+Measure PTerm where
+  measure p =
+    let fc = getPTermLoc p
+      in case fc of
+              (MkFC x y z) => (y, z)
+              (MkVirtualFC x y z) => (y, z)
+              EmptyFC => ?lkjl_2
 
-getPTermFCs : PTerm -> ASTShape
-getPTermFCs (PRef fc x) = Single fc
-getPTermFCs (PPi fc x y z argTy retTy) = Three fc (getPTermFCs argTy) (getPTermFCs retTy)
-getPTermFCs (PLam fc x y z argTy scope) = Four fc (getPTermFCs z) (getPTermFCs argTy) (getPTermFCs scope)
-getPTermFCs (PLet fc x pat nTy nVal scope alts) = ?getPTermFCs_rhs_3
-getPTermFCs (PCase fc x xs) = ?getPTermFCs_rhs_4
-getPTermFCs (PLocal fc xs scope) = ?getPTermFCs_rhs_5
-getPTermFCs (PUpdate fc xs) = ?getPTermFCs_rhs_6
-getPTermFCs (PApp fc x y) = ?getPTermFCs_rhs_7
-getPTermFCs (PWithApp fc x y) = ?getPTermFCs_rhs_8
-getPTermFCs (PNamedApp fc x y z) = ?getPTermFCs_rhs_9
-getPTermFCs (PAutoApp fc x y) = ?getPTermFCs_rhs_10
-getPTermFCs (PDelayed fc x y) = ?getPTermFCs_rhs_11
-getPTermFCs (PDelay fc x) = ?getPTermFCs_rhs_12
-getPTermFCs (PForce fc x) = ?getPTermFCs_rhs_13
-getPTermFCs (PSearch fc depth) = ?getPTermFCs_rhs_14
-getPTermFCs (PPrimVal fc x) = ?getPTermFCs_rhs_15
-getPTermFCs (PQuote fc x) = ?getPTermFCs_rhs_16
-getPTermFCs (PQuoteName fc x) = ?getPTermFCs_rhs_17
-getPTermFCs (PQuoteDecl fc xs) = ?getPTermFCs_rhs_18
-getPTermFCs (PUnquote fc x) = ?getPTermFCs_rhs_19
-getPTermFCs (PRunElab fc x) = ?getPTermFCs_rhs_20
-getPTermFCs (PHole fc bracket holename) = ?getPTermFCs_rhs_21
-getPTermFCs (PType fc) = ?getPTermFCs_rhs_22
-getPTermFCs (PAs fc nameFC x pattern) = ?getPTermFCs_rhs_23
-getPTermFCs (PDotted fc x) = ?getPTermFCs_rhs_24
-getPTermFCs (PImplicit fc) = ?getPTermFCs_rhs_25
-getPTermFCs (PInfer fc) = ?getPTermFCs_rhs_26
-getPTermFCs (POp full opFC x y z) = ?getPTermFCs_rhs_27
-getPTermFCs (PPrefixOp full opFC x y) = ?getPTermFCs_rhs_28
-getPTermFCs (PSectionL full opFC x y) = ?getPTermFCs_rhs_29
-getPTermFCs (PSectionR full opFC x y) = ?getPTermFCs_rhs_30
-getPTermFCs (PEq fc x y) = ?getPTermFCs_rhs_31
-getPTermFCs (PBracketed fc x) = ?getPTermFCs_rhs_32
-getPTermFCs (PString fc xs) = ?getPTermFCs_rhs_33
-getPTermFCs (PMultiline fc indent xs) = ?getPTermFCs_rhs_34
-getPTermFCs (PDoBlock fc x xs) = ?getPTermFCs_rhs_35
-getPTermFCs (PBang fc x) = ?getPTermFCs_rhs_36
-getPTermFCs (PIdiom fc x y) = ?getPTermFCs_rhs_37
-getPTermFCs (PList full nilFC xs) = ?getPTermFCs_rhs_38
-getPTermFCs (PSnocList full nilFC sx) = ?getPTermFCs_rhs_39
-getPTermFCs (PPair fc x y) = ?getPTermFCs_rhs_40
-getPTermFCs (PDPair full opFC x y z) = ?getPTermFCs_rhs_41
-getPTermFCs (PUnit fc) = ?getPTermFCs_rhs_42
-getPTermFCs (PIfThenElse fc x y z) = ?getPTermFCs_rhs_43
-getPTermFCs (PComprehension fc x xs) = ?getPTermFCs_rhs_44
-getPTermFCs (PRewrite fc x y) = ?getPTermFCs_rhs_45
-getPTermFCs (PRange fc x y z) = ?getPTermFCs_rhs_46
-getPTermFCs (PRangeStream fc x y) = ?getPTermFCs_rhs_47
-getPTermFCs (PPostfixApp fc x xs) = ?getPTermFCs_rhs_48
-getPTermFCs (PPostfixAppPartial fc xs) = ?getPTermFCs_rhs_49
-getPTermFCs (PUnifyLog fc x y) = ?getPTermFCs_rhs_50
-getPTermFCs (PWithUnambigNames fc xs x) = ?getPTermFCs_rhs_51
+go : Maybe NonEmptyFC -> a -> PosMap (NonEmptyFC, a) -> PosMap (NonEmptyFC, a)
+go (Just fc) x pm = insert (fc, x) pm
+go Nothing _ pm = pm
 
-getPClauseFCs : PClause -> ASTShape
-getPClauseFCs (MkPatClause fc lhs rhs whereblock) =
-  ThreeLS fc (getPTermFCs lhs) (getPTermFCs rhs) (map getPDeclFCs whereblock)
-getPClauseFCs (MkWithClause fc lhs rig wval prf xs ys) =
-  ThreeLS fc (getPTermFCs lhs) (getPTermFCs wval) (map getPClauseFCs ys)
-getPClauseFCs (MkImpossible fc lhs) =
-  Two fc (getPTermFCs lhs)
+getPDeclFCs : PosMap (NonEmptyFC, PDecl) -> PDecl -> PosMap (NonEmptyFC, PDecl)
+
+getPTermFCs : PosMap (NonEmptyFC, PTerm) -> PTerm -> PosMap (NonEmptyFC, PTerm)
+getPTermFCs pm p@(PRef fc x) = let nonEmpty = isNonEmptyFC fc in
+  go nonEmpty p pm
+getPTermFCs pm p@(PPi fc x y z argTy retTy) = ?lkjlkk12
+getPTermFCs pm p@(PLam fc x y z argTy scope) = ?lkjlkk13
+getPTermFCs pm p@(PLet fc x pat nTy nVal scope alts) = ?getPTermFCs_rhs_3
+getPTermFCs pm p@(PCase fc x xs) = ?getPTermFCs_rhs_4
+getPTermFCs pm p@(PLocal fc xs scope) = ?getPTermFCs_rhs_5
+getPTermFCs pm p@(PUpdate fc xs) = ?getPTermFCs_rhs_6
+getPTermFCs pm p@(PApp fc x y) = ?getPTermFCs_rhs_7
+getPTermFCs pm p@(PWithApp fc x y) = ?getPTermFCs_rhs_8
+getPTermFCs pm p@(PNamedApp fc x y z) = ?getPTermFCs_rhs_9
+getPTermFCs pm p@(PAutoApp fc x y) = ?getPTermFCs_rhs_10
+getPTermFCs pm p@(PDelayed fc x y) = ?getPTermFCs_rhs_11
+getPTermFCs pm p@(PDelay fc x) = ?getPTermFCs_rhs_12
+getPTermFCs pm p@(PForce fc x) = ?getPTermFCs_rhs_13
+getPTermFCs pm p@(PSearch fc depth) = ?getPTermFCs_rhs_14
+getPTermFCs pm p@(PPrimVal fc x) = ?getPTermFCs_rhs_15
+getPTermFCs pm p@(PQuote fc x) = ?getPTermFCs_rhs_16
+getPTermFCs pm p@(PQuoteName fc x) = ?getPTermFCs_rhs_17
+getPTermFCs pm p@(PQuoteDecl fc xs) = ?getPTermFCs_rhs_18
+getPTermFCs pm p@(PUnquote fc x) = ?getPTermFCs_rhs_19
+getPTermFCs pm p@(PRunElab fc x) = ?getPTermFCs_rhs_20
+getPTermFCs pm p@(PHole fc bracket holename) = ?getPTermFCs_rhs_21
+getPTermFCs pm p@(PType fc) = ?getPTermFCs_rhs_22
+getPTermFCs pm p@(PAs fc nameFC x pattern) = ?getPTermFCs_rhs_23
+getPTermFCs pm p@(PDotted fc x) = ?getPTermFCs_rhs_24
+getPTermFCs pm p@(PImplicit fc) = ?getPTermFCs_rhs_25
+getPTermFCs pm p@(PInfer fc) = ?getPTermFCs_rhs_26
+getPTermFCs pm p@(POp full opFC x y z) = ?getPTermFCs_rhs_27
+getPTermFCs pm p@(PPrefixOp full opFC x y) = ?getPTermFCs_rhs_28
+getPTermFCs pm p@(PSectionL full opFC x y) = ?getPTermFCs_rhs_29
+getPTermFCs pm p@(PSectionR full opFC x y) = ?getPTermFCs_rhs_30
+getPTermFCs pm p@(PEq fc x y) = ?getPTermFCs_rhs_31
+getPTermFCs pm p@(PBracketed fc x) = ?getPTermFCs_rhs_32
+getPTermFCs pm p@(PString fc xs) = ?getPTermFCs_rhs_33
+getPTermFCs pm p@(PMultiline fc indent xs) = ?getPTermFCs_rhs_34
+getPTermFCs pm p@(PDoBlock fc x xs) = ?getPTermFCs_rhs_35
+getPTermFCs pm p@(PBang fc x) = ?getPTermFCs_rhs_36
+getPTermFCs pm p@(PIdiom fc x y) = ?getPTermFCs_rhs_37
+getPTermFCs pm p@(PList full nilFC xs) = ?getPTermFCs_rhs_38
+getPTermFCs pm p@(PSnocList full nilFC sx) = ?getPTermFCs_rhs_39
+getPTermFCs pm p@(PPair fc x y) = ?getPTermFCs_rhs_40
+getPTermFCs pm p@(PDPair full opFC x y z) = ?getPTermFCs_rhs_41
+getPTermFCs pm p@(PUnit fc) = ?getPTermFCs_rhs_42
+getPTermFCs pm p@(PIfThenElse fc x y z) = ?getPTermFCs_rhs_43
+getPTermFCs pm p@(PComprehension fc x xs) = ?getPTermFCs_rhs_44
+getPTermFCs pm p@(PRewrite fc x y) = ?getPTermFCs_rhs_45
+getPTermFCs pm p@(PRange fc x y z) = ?getPTermFCs_rhs_46
+getPTermFCs pm p@(PRangeStream fc x y) = ?getPTermFCs_rhs_47
+getPTermFCs pm p@(PPostfixApp fc x xs) = ?getPTermFCs_rhs_48
+getPTermFCs pm p@(PPostfixAppPartial fc xs) = ?getPTermFCs_rhs_49
+getPTermFCs pm p@(PUnifyLog fc x y) = ?getPTermFCs_rhs_50
+getPTermFCs pm p@(PWithUnambigNames fc xs x) = ?getPTermFCs_rhs_51
+
+getPClauseFCs : PosMap PClause -> PClause -> PosMap (NonEmptyFC, PClause)
+getPClauseFCs pm (MkPatClause fc lhs rhs whereblock) = ?lkja123
+getPClauseFCs pm (MkWithClause fc lhs rig wval prf xs ys) = ?lkja124
+getPClauseFCs pm (MkImpossible fc lhs) = ?lkja125
 
 
 mutual
